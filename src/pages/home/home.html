@@ -1,14 +1,56 @@
 <ion-header>
   <ion-navbar>
     <ion-title>
-      Ionic Blank
+      InmoBusiness GT
     </ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
-  The world is your oyster.
-  <p>
-    If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will be your guide.
-  </p>
+  <ion-list>
+    <ion-item>
+      <ion-label>Municipios</ion-label>
+      <ion-select [(ngModel)]="muni">
+        <ion-option [value]="mun.name" *ngFor="let mun of municipios">{{mun.name}}</ion-option>
+      </ion-select>
+    </ion-item>
+  </ion-list>
+  <ion-card *ngFor="let item of fhaDisp">
+    <ion-slides class="image-slider" loop="true" effect="coverflow">
+      <ion-slide *ngFor="let img of item.images">
+        <img [src]="img" class="thumb-img" imageViewer>
+      </ion-slide>
+    </ion-slides>
+    <ion-item>
+      <span item-left><h2><strong>Código</strong></h2>
+      <a [href]="item.linkToGo">{{item.code}}</a></span>
+    </ion-item>
+    <ion-item>
+      <span item-left><h2><strong>Precio</strong></h2>
+      Q.{{item.price | number : '1.2-2'}}</span>
+      <span item-right><h2><strong>Enganche</strong></h2>
+      Q.{{item.price * 0.05 | number : '1.2-2'}}</span>
+    </ion-item>
+    <ion-card-content>
+      <h2><ion-icon name="navigate"></ion-icon><strong>Dirección</strong></h2>
+      <p>{{item.address}}</p>
+      <h2><ion-icon name="home"></ion-icon><strong>Ambientes</strong></h2>
+      <p>{{item.environments}}</p>
+    </ion-card-content>
+    <ion-item item-end>
+      <ion-icon name="checkmark-circle-outline" item-start></ion-icon>
+      <h2><strong>Area de Construcción</strong></h2>
+      <p>{{item.consArea}}</p>
+      <h2><strong>Area de Terreno</strong></h2>
+      <p>{{item.fieldArea}}</p>
+    </ion-item>
+    <ion-item>
+      <span item-left style="color:green" *ngIf="item.available"> Disponible</span>
+      <button ion-button icon-left clear item-end>
+        <ion-icon name="navigate"></ion-icon>
+        Compartir
+      </button>
+    </ion-item>
+
+  </ion-card>
 </ion-content>
